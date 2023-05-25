@@ -18,7 +18,7 @@ namespace NetworkingExample
         public Form1()
         {
             InitializeComponent();
-            
+
         }
 
         private void sendButton_Click(object sender, EventArgs e)
@@ -35,7 +35,7 @@ namespace NetworkingExample
             {
                 ClientFunc(text);
             }
-            
+
         }
         private void ServerFunc(string text)
         {
@@ -65,7 +65,7 @@ namespace NetworkingExample
 
             string input;
 
-            while(true)
+            while (true)
             {
                 data = new byte[1024];
 
@@ -83,7 +83,7 @@ namespace NetworkingExample
 
                 client.Send(Encoding.UTF8.GetBytes(input));
 
-                
+
             }
             connectingLabel.Text = $"Disconnected from {clientep.Address}";
 
@@ -92,7 +92,7 @@ namespace NetworkingExample
             newsock.Close();
 
 
-            
+
 
         }
         private void ClientFunc(string text)
@@ -115,7 +115,42 @@ namespace NetworkingExample
                 connectingLabel.Text = "Unable to connect";
             }
 
+            int recv = server.Receive(data);
+
+            stringData = Encoding.UTF8.GetString(data, 0, recv);
+
+            recieveLabel.Text += stringData;
+
+            while (true)
+            {
+                if (text.ToLower() == "exit")
+                {
+                    break;
+                }
+
+                recieveLabel.Text += $"\n You: {text}";
+
+                server.Send(Encoding.UTF8.GetBytes(text));
+
+                data = new byte[1024];
+
+                recv = server.Receive(data);
+
+                stringData = Encoding.UTF8.GetString(data, 0, recv);
+
+                recieveLabel.Text += $"\n Server: {stringData}";
+
+            }
+            connectingLabel.Text = "Disconnecting from server...";
+
+            server.Shutdown(SocketShutdown.Both);
+
+            server.Close();
+
+            connectingLabel.Text = "Disconnected!";
 
 
+
+        }
     }
 }
