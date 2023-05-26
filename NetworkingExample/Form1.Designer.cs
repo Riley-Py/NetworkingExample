@@ -35,7 +35,6 @@
             this.connectingLabel = new System.Windows.Forms.Label();
             this.clientCheck = new System.Windows.Forms.CheckBox();
             this.serverCheck = new System.Windows.Forms.CheckBox();
-            this.startButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // textLabel
@@ -56,7 +55,7 @@
             // 
             // sendButton
             // 
-            this.sendButton.Location = new System.Drawing.Point(358, 169);
+            this.sendButton.Location = new System.Drawing.Point(348, 146);
             this.sendButton.Name = "sendButton";
             this.sendButton.Size = new System.Drawing.Size(75, 23);
             this.sendButton.TabIndex = 2;
@@ -102,22 +101,12 @@
             this.serverCheck.Text = "Server";
             this.serverCheck.UseVisualStyleBackColor = true;
             // 
-            // startButton
-            // 
-            this.startButton.Location = new System.Drawing.Point(358, 130);
-            this.startButton.Name = "startButton";
-            this.startButton.Size = new System.Drawing.Size(75, 23);
-            this.startButton.TabIndex = 7;
-            this.startButton.Text = "Send";
-            this.startButton.UseVisualStyleBackColor = true;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.RosyBrown;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.startButton);
             this.Controls.Add(this.serverCheck);
             this.Controls.Add(this.clientCheck);
             this.Controls.Add(this.connectingLabel);
@@ -141,7 +130,6 @@
         private System.Windows.Forms.Label connectingLabel;
         private System.Windows.Forms.CheckBox clientCheck;
         private System.Windows.Forms.CheckBox serverCheck;
-        private System.Windows.Forms.Button startButton;
     }
 }
 

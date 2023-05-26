@@ -53,6 +53,8 @@ namespace NetworkingExample
 
             connectingLabel.Text = "Waiting for a connection...";
 
+            Refresh();
+
             Socket client = newsock.Accept();
 
             IPEndPoint clientep = (IPEndPoint)client.RemoteEndPoint;
