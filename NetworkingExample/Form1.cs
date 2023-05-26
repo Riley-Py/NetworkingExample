@@ -14,7 +14,13 @@ namespace NetworkingExample
 {
     public partial class Form1 : Form
     {
+        int hi;
+        string change = "change";
         string text;
+        string stringData;
+        byte[] data = new byte[1024];
+        Socket server = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+
         public Form1()
         {
             InitializeComponent();
@@ -39,6 +45,8 @@ namespace NetworkingExample
         }
         private void ServerFunc(string text)
         {
+             
+            
             int recv;
 
             byte[] data = new byte[1024];
@@ -99,36 +107,12 @@ namespace NetworkingExample
         }
         private void ClientFunc(string text)
         {
-            byte[] data = new byte[1024];
-
-            string stringData;
-
-            IPEndPoint ipep = new IPEndPoint(IPAddress.Parse("10.63.42.206"), 9050);
-
-            Socket server = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-
-            try
-            {
-                server.Connect(ipep);
-
-            }
-            catch (SocketException)
-            {
-                connectingLabel.Text = "Unable to connect";
-            }
 
             int recv = server.Receive(data);
 
             stringData = Encoding.UTF8.GetString(data, 0, recv);
 
             recieveLabel.Text += stringData;
-
-            //while (true)
-            //{
-            //    if (text.ToLower() == "exit")
-            //    {
-            //        break;
-            //    }
 
                 recieveLabel.Text += $"\n You: {text}";
 
@@ -141,18 +125,20 @@ namespace NetworkingExample
                 stringData = Encoding.UTF8.GetString(data, 0, recv);
 
                 recieveLabel.Text += $"\n Server: {stringData}";
+        }
 
-            //}
-            //connectingLabel.Text = "Disconnecting from server...";
+        private void clientConnectButton_Click(object sender, EventArgs e)
+        {
+            IPEndPoint ipep = new IPEndPoint(IPAddress.Parse("10.63.42.206"), 9050);
+            try
+            {
+                server.Connect(ipep);
 
-            //server.Shutdown(SocketShutdown.Both);
-
-            //server.Close();
-
-            //connectingLabel.Text = "Disconnected!";
-
-
-
+            }
+            catch (SocketException)
+            {
+                connectingLabel.Text = "Unable to connect";
+            }
         }
     }
 }
