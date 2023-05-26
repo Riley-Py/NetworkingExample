@@ -18,8 +18,14 @@ namespace NetworkingExample
         string change = "change";
         string text;
         string stringData;
+        int recv;
         byte[] data = new byte[1024];
+        IPEndPoint ipep = new IPEndPoint(IPAddress.Parse("10.63.42.206"), 9050);
         Socket server = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+        Socket newsock = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+        Socket client;
+        IPEndPoint clientep;
+       
 
         public Form1()
         {
@@ -45,29 +51,16 @@ namespace NetworkingExample
         }
         private void ServerFunc(string text)
         {
-             
+
+
+
+
+
+
+           
+
+
             
-            int recv;
-
-            byte[] data = new byte[1024];
-
-            IPEndPoint ipep = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 9050);
-
-            Socket newsock = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-
-            newsock.Bind(ipep);
-
-            newsock.Listen(10);
-
-            connectingLabel.Text = "Waiting for a connection...";
-
-            Refresh();
-
-            Socket client = newsock.Accept();
-
-            IPEndPoint clientep = (IPEndPoint)client.RemoteEndPoint;
-
-            connectingLabel.Text = $"Connected with {clientep.Address} at port {clientep.Port}";
 
             data = Encoding.UTF8.GetBytes(text);
 
@@ -95,7 +88,7 @@ namespace NetworkingExample
 
 
            // }
-            connectingLabel.Text = $"Disconnected from {clientep.Address}";
+            //connectingLabel.Text = $"Disconnected from {clientep.Address}";
 
             //client.Close();
 
@@ -129,7 +122,7 @@ namespace NetworkingExample
 
         private void clientConnectButton_Click(object sender, EventArgs e)
         {
-            IPEndPoint ipep = new IPEndPoint(IPAddress.Parse("10.63.42.206"), 9050);
+            
             try
             {
                 server.Connect(ipep);
@@ -139,6 +132,28 @@ namespace NetworkingExample
             {
                 connectingLabel.Text = "Unable to connect";
             }
+        }
+
+        private void connectServer_Click(object sender, EventArgs e)
+        {
+            newsock.Bind(ipep);
+
+            newsock.Listen(10);
+
+            connectingLabel.Text = "Waiting for a connection...";
+
+            Refresh();
+
+            client = newsock.Accept();
+
+            clientep = (IPEndPoint)client.RemoteEndPoint;
+
+            connectingLabel.Text = $"Connected with {clientep.Address} at port {clientep.Port}";
+
+            Refresh();
+
+
+
         }
     }
 }
