@@ -67,16 +67,16 @@ namespace NetworkingExample
 
             string input;
 
-            while (true)
-            {
+            //while (true)
+            //{
                 data = new byte[1024];
 
                 recv = client.Receive(data);
 
-                if (recv == 0)
-                {
-                    break;
-                }
+                //if (recv == 0)
+                //{
+                //    break;
+                //}
                 recieveLabel.Text += $"\n Client: {Encoding.UTF8.GetString(data, 0, recv)}";
 
                 input = recieveLabel.Text;
@@ -86,12 +86,12 @@ namespace NetworkingExample
                 client.Send(Encoding.UTF8.GetBytes(input));
 
 
-            }
+           // }
             connectingLabel.Text = $"Disconnected from {clientep.Address}";
 
-            client.Close();
+            //client.Close();
 
-            newsock.Close();
+            //newsock.Close();
 
 
 
@@ -103,7 +103,7 @@ namespace NetworkingExample
 
             string stringData;
 
-            IPEndPoint ipep = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 9050);
+            IPEndPoint ipep = new IPEndPoint(IPAddress.Parse("10.63.42.206"), 9050);
 
             Socket server = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
@@ -123,12 +123,12 @@ namespace NetworkingExample
 
             recieveLabel.Text += stringData;
 
-            while (true)
-            {
-                if (text.ToLower() == "exit")
-                {
-                    break;
-                }
+            //while (true)
+            //{
+            //    if (text.ToLower() == "exit")
+            //    {
+            //        break;
+            //    }
 
                 recieveLabel.Text += $"\n You: {text}";
 
@@ -142,14 +142,14 @@ namespace NetworkingExample
 
                 recieveLabel.Text += $"\n Server: {stringData}";
 
-            }
-            connectingLabel.Text = "Disconnecting from server...";
+            //}
+            //connectingLabel.Text = "Disconnecting from server...";
 
-            server.Shutdown(SocketShutdown.Both);
+            //server.Shutdown(SocketShutdown.Both);
 
-            server.Close();
+            //server.Close();
 
-            connectingLabel.Text = "Disconnected!";
+            //connectingLabel.Text = "Disconnected!";
 
 
 
